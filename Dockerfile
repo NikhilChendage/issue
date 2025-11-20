@@ -8,7 +8,7 @@ COPY . /var/www/html
 
 RUN mkdir -p /var/www/html/uploads && chmod -R 777 /var/www/html/uploads
 
-COPY nginx.conf /etc/nginx/nginx.conf
+
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
