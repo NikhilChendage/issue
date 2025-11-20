@@ -3,19 +3,20 @@
    Database: social_issues_db
    Tables: issues, admins
 */
-session_start();
+<?php
+$host = "yamabiko.proxy.rlwy.net";  // your Railway host
+$port = 35995;                      // your Railway port
+$dbname = "railway";                // always railway
+$username = "root";                 // Railway MySQL username
+$password = "YOUR_PASSWORD";        // Railway generated password
 
-$host="localhost";
-$db="social_issues_db";
-$user="root";
-$pass="";
-
-try{
-    $pdo=new PDO("mysql:host=$host;dbname=$db;charset=utf8",$user,$pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-}catch(Exception $e){
-    die("DB Error: ".$e->getMessage());
+try {
+    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("DB Error: " . $e->getMessage());
 }
+?>
 
 function is_admin(){ return isset($_SESSION['admin']); }
 
