@@ -3,20 +3,25 @@
    Database: social_issues_db
    Tables: issues, admins
 */
-<?php
-$host = "yamabiko.proxy.rlwy.net";  // your Railway host
-$port = 35995;                      // your Railway port
-$dbname = "railway";                // always railway
-$username = "root";                 // Railway MySQL username
-$password = "YOUR_PASSWORD";        // Railway generated password
+// Railway MySQL Connection
+session_start();
+
+$host = getenv("DB_HOST") ?: "yamabiko.proxy.rlwy.net";
+$db   = getenv("DB_NAME") ?: "railway";
+$user = getenv("DB_USER") ?: "root";
+$pass = getenv("DB_PASS") ?: "PfbaYOUyKxrAvxRTRqCAMZrzIsgSoryD";
+$port = getenv("DB_PORT") ?: "35995";
 
 try {
-    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password);
+    $pdo = new PDO(
+        "mysql:host=$host;port=$port;dbname=$db;charset=utf8",
+        $user,
+        $pass
+    );
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
+} catch(Exception $e) {
     die("DB Error: " . $e->getMessage());
 }
-?>
 
 function is_admin(){ return isset($_SESSION['admin']); }
 
@@ -2073,3 +2078,4 @@ foreach($issues as $issue) {
     </script>
 </body>
 </html>
+
