@@ -5,23 +5,19 @@
 */
 // Railway MySQL Connection
 session_start();
-
-$host = getenv("DB_HOST") ?: "yamabiko.proxy.rlwy.net";
-$db   = getenv("DB_NAME") ?: "railway";
-$user = getenv("DB_USER") ?: "root";
-$pass = getenv("DB_PASS") ?: "PfbaYOUyKxrAvxRTRqCAMZrzIsgSoryD";
-$port = getenv("DB_PORT") ?: "35995";
+$host = "yamanote.proxy.rlwy.net";
+$port = "56152";
+$db   = "railway";
+$user = "root";
+$pass = "LjQTQMZpgUTpMgGvLnLWvKLcwrCZmqjW";
 
 try {
-    $pdo = new PDO(
-        "mysql:host=$host;port=$port;dbname=$db;charset=utf8",
-        $user,
-        $pass
-    );
+    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$db;charset=utf8", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(Exception $e) {
     die("DB Error: " . $e->getMessage());
 }
+
 
 function is_admin(){ return isset($_SESSION['admin']); }
 
@@ -2078,4 +2074,5 @@ foreach($issues as $issue) {
     </script>
 </body>
 </html>
+
 
