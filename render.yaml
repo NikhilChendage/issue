@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: community-issue-reporter
+    env: docker
+    buildCommand: ""
+    startCommand: ""
+    plan: free
+    rootDir: .
+    dockerfilePath: ./Dockerfile
+    nginx:
+      configPath: ./nginx.conf
